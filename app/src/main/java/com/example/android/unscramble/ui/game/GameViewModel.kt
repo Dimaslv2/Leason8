@@ -53,7 +53,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun nextWord(): Boolean {
-        return if (currentWordCount < MAX_NO_OF_WORDS) {
+        return if (_currentWordCount < MAX_NO_OF_WORDS) {
             getNextWord()
             true
         } else false
@@ -67,6 +67,15 @@ class GameViewModel : ViewModel() {
             return true
         }
         return false
+    }
+    /*
+* Re-initializes the game data to restart the game.
+*/
+    fun reinitializeData() {
+        _score = 0
+        _currentWordCount = 0
+        wordsList.clear()
+        getNextWord()
     }
     init {
         Log.d("GameFragment", "GameViewModel created!")

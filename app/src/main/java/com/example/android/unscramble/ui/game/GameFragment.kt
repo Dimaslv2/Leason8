@@ -51,8 +51,7 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = GameFragmentBinding.inflate(inflater, container, false)
-        Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " +
-                "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
+        Log.d("GameFragment", "GameFragment created/re-created!")
         return binding.root
     }
 
@@ -96,12 +95,7 @@ class GameFragment : Fragment() {
      * Increases the word count.
      */
     private fun onSkipWord() {
-        if (viewModel.nextWord()) {
-            setErrorTextField(false)
-            updateNextWordOnScreen()
-        } else {
-            showFinalScoreDialog()
-        }
+
     }
 
     private fun showFinalScoreDialog() {
@@ -132,7 +126,6 @@ class GameFragment : Fragment() {
      * restart the game.
      */
     private fun restartGame() {
-        viewModel.reinitializeData()
         setErrorTextField(false)
         updateNextWordOnScreen()
     }
