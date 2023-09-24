@@ -34,10 +34,6 @@ class GameFragment : Fragment() {
 
     private val viewModel: GameViewModel by viewModels()
 
-    private var score = 0
-    private var currentWordCount = 0
-    private var currentScrambledWord = "test"
-
 
     // Binding object instance with access to the views in the game_fragment.xml layout
     private lateinit var binding: GameFragmentBinding
@@ -52,6 +48,8 @@ class GameFragment : Fragment() {
     ): View {
         binding = GameFragmentBinding.inflate(inflater, container, false)
         Log.d("GameFragment", "GameFragment created/re-created!")
+        Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " +
+                "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
         return binding.root
     }
 
@@ -94,9 +92,6 @@ class GameFragment : Fragment() {
      * Skips the current word without changing the score.
      * Increases the word count.
      */
-    private fun onSkipWord() {
-
-    }
 
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
@@ -126,6 +121,7 @@ class GameFragment : Fragment() {
      * restart the game.
      */
     private fun restartGame() {
+        viewModel.reinitializeData()
         setErrorTextField(false)
         updateNextWordOnScreen()
     }
@@ -147,6 +143,15 @@ class GameFragment : Fragment() {
         } else {
             binding.textField.isErrorEnabled = false
             binding.textInputEditText.text = null
+        }
+    }
+
+    private fun onSkipWord() {
+        if (viewModel.nextWord()) {
+            setErrorTextField(false)
+            updateNextWordOnScreen()
+        } else {
+            showFinalScoreDialog()
         }
     }
 
