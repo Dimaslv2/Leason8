@@ -17,6 +17,7 @@ class GameViewModel : ViewModel() {
     val count: Int
         get() = _count
 
+
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
 
