@@ -71,12 +71,7 @@ class GameViewModel : ViewModel() {
     /*
 * Re-initializes the game data to restart the game.
 */
-    fun reinitializeData() {
-        _score = 0
-        _currentWordCount = 0
-        wordsList.clear()
-        getNextWord()
-    }
+
     init {
         Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
